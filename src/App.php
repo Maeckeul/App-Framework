@@ -3,13 +3,13 @@
 namespace App;
 
 class App {
-    
-    public function handleRequest() {
-        $page = $this->getPageFromUrl();
+
+    public function handleRequest($request) {
+        $page = $this->getPageFromUrl($request);
         return $this->dispatchRoute($page);
     }
 
-    private function getPageFromUrl() {
+    private function getPageFromUrl($request) {
         if(isset($_GET['page'])) {
             $pageFound = $_GET['page'];
             if ($pageFound == '') {
