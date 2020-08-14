@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -20,10 +21,10 @@ class Controller extends BaseController {
         $data = $this->model->getPageData('home');
         $content = $this->view->displayHtml($data);
 
-        $response = new Response();
-        $response->setContent($content);
+        $response = new Response($content);
+        /* $response->setContent($content);
         $response->headers->set('content-type', 'text/html');
-        $response->setStatusCode(Response::HTTP_OK);
+        $response->setStatusCode(Response::HTTP_OK); */
         
         return $response;
     }
@@ -42,10 +43,10 @@ class Controller extends BaseController {
 
         $content = $this->view->displayHtml($data);
 
-        $response = new Response();
-        $response->setContent($content);
+        $response = new Response($content);
+        /* $response->setContent($content);
         $response->headers->set('content-type', 'text/html');
-        $response->setStatusCode(Response::HTTP_OK);
+        $response->setStatusCode(Response::HTTP_OK); */
         
         return $response;
     }
@@ -53,12 +54,7 @@ class Controller extends BaseController {
     function executeApi() {
         $data = $this->model->getPageData('contact');
 
-        $content = $this->view->displayJson($data['users']);
-
-        $response = new Response();
-        $response->setContent($content);
-        $response->headers->set('content-type', 'application/json');
-        $response->setStatusCode(Response::HTTP_OK);
+        $response = new JsonResponse($data['users']);
         
         return $response;
     }

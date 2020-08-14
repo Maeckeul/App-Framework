@@ -14,10 +14,4 @@ class View {
     
         return $html;
     }
-    
-    function displayJson(array $data) {
-    
-        return json_encode($data);
-    }
-    
 }

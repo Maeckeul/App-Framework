@@ -3,6 +3,7 @@
         "psr-4": {"App\\": "src/"}
     },
     "require": {
-        "symfony/http-foundation": "^5.1"
+        "symfony/http-foundation": "^5.1",
+        "symfony/templating": "^5.1"
     }
 }

@@ -25,10 +25,10 @@ class BaseController {
 
         $content = $this->view->displayHtml($data);
 
-        $response = new Response();
-        $response->setContent($content);
+        $response = new Response($content, Response::HTTP_NOT_FOUND);
+        /* $response->setContent($content);
         $response->headers->set('content-type', 'text/html');
-        $response->setStatusCode(Response::HTTP_NOT_FOUND);
+        $response->setStatusCode(Response::HTTP_NOT_FOUND); */
         
         return $response;
     }
