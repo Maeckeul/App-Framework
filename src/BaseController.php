@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Symfony\Component\HttpFoundation\Response;
+
 class BaseController {
 
     /**
@@ -21,8 +23,13 @@ class BaseController {
     function execute404() {
         $data = $this->model->getPageData('404');
 
-        http_response_code(404);
+        $content = $this->view->displayHtml($data);
 
-        return $this->view->displayHtml($data);
+        $response = new Response();
+        $response->setContent($content);
+        $response->headers->set('content-type', 'text/html');
+        $response->setStatusCode(Response::HTTP_NOT_FOUND);
+        
+        return $response;
     }
 }

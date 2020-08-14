@@ -1,10 +1,13 @@
 <?php
 
 use App\App;
+use Symfony\Component\HttpFoundation\Request;
 
 require __DIR__ . '/vendor/autoload.php';
 
-$app = new App();
-$response = $app->handleRequest($request);
+$request = Request::createFromGlobals();
 
-echo $response;
+$app = new App();
+
+$response = $app->handleRequest($request);
+$response->send();

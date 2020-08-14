@@ -2,14 +2,22 @@
 
 namespace App;
 
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+
 class App {
 
-    public function handleRequest($request) {
+    /**
+     * @return Response
+     */
+    public function handleRequest(Request  $request) {
         $page = $this->getPageFromUrl($request);
         return $this->dispatchRoute($page);
     }
 
-    private function getPageFromUrl($request) {
+    private function getPageFromUrl(Request $request) {
+
+        /*
         if(isset($_GET['page'])) {
             $pageFound = $_GET['page'];
             if ($pageFound == '') {
@@ -18,6 +26,10 @@ class App {
         } else {
             $pageFound = 'home';
         }
+        */
+
+        $pageFound = $request->query->get('page', 'home');
+
         return $pageFound;
     }
 

@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Symfony\Component\HttpFoundation\Response;
+
 /**
  * This class is the main controller for our app
  * 
@@ -9,14 +11,21 @@ namespace App;
  */
 
 class Controller extends BaseController {
+
     /**
      * @return string contain the html to display
      */
 
     function executeHome() {
         $data = $this->model->getPageData('home');
+        $content = $this->view->displayHtml($data);
 
-        return $this->view->displayHtml($data);
+        $response = new Response();
+        $response->setContent($content);
+        $response->headers->set('content-type', 'text/html');
+        $response->setStatusCode(Response::HTTP_OK);
+        
+        return $response;
     }
 
     function executeContact() {
@@ -31,12 +40,26 @@ class Controller extends BaseController {
 
         $data['content'] .= $usersHtml;
 
-        return $this->view->displayHtml($data);
+        $content = $this->view->displayHtml($data);
+
+        $response = new Response();
+        $response->setContent($content);
+        $response->headers->set('content-type', 'text/html');
+        $response->setStatusCode(Response::HTTP_OK);
+        
+        return $response;
     }
 
     function executeApi() {
         $data = $this->model->getPageData('contact');
 
-        return $this->view->displayJson($data['users']);
+        $content = $this->view->displayJson($data['users']);
+
+        $response = new Response();
+        $response->setContent($content);
+        $response->headers->set('content-type', 'application/json');
+        $response->setStatusCode(Response::HTTP_OK);
+        
+        return $response;
     }
 }
